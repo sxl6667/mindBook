@@ -28,9 +28,12 @@ class UserModelViewSet(ModelViewSet):
 	serializer_class = serializer.UserModelSerializer
 
 	def retrieve(self, request, *args, **kwargs):
-		data = request.data
-		verify = User.objects.filter(uid=data['uid'], pwd=data['pwd'])
-		if verify:
-			return Response(status=200)
-		return Response(status=400)
+		if request.method == 'POST':
+			data = request.data
+			verify = User.objects.filter(uid=data['uid'], pwd=data['pwd'])
+			if verify:
+				return Response(status=200)
+			return Response(status=400)
+		else:
+			return super().retrieve()
 
