@@ -167,11 +167,9 @@ export default {
         return;
       }
       this.$http
-        .post(this.API.API_Login, {
-          data: this.registerForm,
-        })
+        .post(this.API.API_Register,this.registerForm)
         .then((res) => {
-          if (res.data.code === 200) {
+          if (res) {
             //验证成功
             this.$message({
               message: "注册成功",
