@@ -21,5 +21,5 @@ from app01 import urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cors/', include_docs_urls(title='所有API')),
-    path('/', include(urls))
+    path('', include(urls))
 ]
