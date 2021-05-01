@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+}
+html,body,#app{
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.clearfix{
+    clear: both;
+    content: '';
+    display: block;
+}
+input{
+    border: none;
+    outline: none;
+}
+body{
+    overflow: hidden;
+}
