@@ -35,5 +35,6 @@ class UserModelViewSet(ModelViewSet):
 				return Response(status=200)
 			return Response(status=400)
 		else:
-			return super().retrieve()
+			return super().retrieve(request, *args, **kwargs)
+
 
