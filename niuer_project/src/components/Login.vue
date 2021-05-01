@@ -14,10 +14,10 @@
           <h2>个人博客</h2>
           <form>
             <div class="inputBox">
-              <input type="text" placeholder="用户名" v-model="loginForm.username" />
+              <input type="text" placeholder="用户名" v-model="loginForm.uid" />
             </div>
             <div class="inputBox">
-              <input type="password" placeholder="密码" v-model="loginForm.password" />
+              <input type="password" placeholder="密码" v-model="loginForm.pwd" />
             </div>
             <div class="inputBox">
               <input type="submit" value="登录" @click="login" />
@@ -47,21 +47,21 @@
           <h2>注册</h2>
           <form>
             <div class="inputBox">
-              <input type="text" placeholder="输入用户名" v-model="loginForm.username" />
+              <input type="text" placeholder="输入用户名" v-model="registerForm.uid" />
             </div>
             <div class="inputBox">
-              <input type="password" placeholder="输入密码" v-model="loginForm.password" />
+              <input type="password" placeholder="输入密码" v-model="registerForm.pwd" />
             </div>
             <div class="inputBox">
-              <input type="password" placeholder="确定密码" v-model="loginForm.password" />
+              <input type="password" placeholder="确定密码" v-model="registerForm.repwd" />
             </div>
             <!-- 后面可以增加手机号码验证 -->
             <div class="inputBox fl">
               <input type="submit" value="返回登录" @click="register" />
             </div>
             <div class="inputBox fl">
-              <input type="submit" value="注册" @click="inforegister" class="fr"/>
-            </div> 
+              <input type="submit" value="注册" @click="inforegister" class="fr" />
+            </div>
           </form>
         </div>
       </div>
@@ -75,8 +75,13 @@ export default {
     return {
       // 这是登入表单的数据绑定对象
       loginForm: {
-        username: "",
-        password: "",
+        uid: "",
+        pwd: "",
+      },
+      registerForm: {
+        uid: "",
+        pwd: "",
+        repwd: "",
       },
       isnologin: "false",
     };
@@ -87,30 +92,40 @@ export default {
   methods: {
     //页面加载时运行的函数
     createcode() {
-      document.querySelector(".box1").style.visibility = "hidden"
-      document.querySelector(".box").style.visibility = "visible"
+      document.querySelector(".box1").style.visibility = "hidden";
+      document.querySelector(".box").style.visibility = "visible";
     },
     // 点击登录按钮，进行数据验证
     login() {
-      if (this.loginForm.username == "") {
+      if (this.loginForm.uid == "") {
         this.$message.error("用户名不为空");
         return;
       }
-      if (this.loginForm.password == "") {
+      if (this.loginForm.pwd == "") {
         this.$message.error("密码不为空");
         return;
       }
-      if (
-        this.loginForm.username == "123456" &&
-        this.loginForm.password == "666666"
-      ) {
-        this.$message({
-          message: "登录成功",
-          type: "success",
-        });
+      // 判定账号密码是否含有中文
+      if (/.*[\u4e00-\u9fa5]+.*$/.test(this.loginForm.uid) || /.*[\u4e00-\u9fa5]+.*$/.test(this.loginForm.pwd)) {
+        this.$message.error("用户名或密码不能含中文");
         return;
       }
-      this.$message.error("用户名或密码不正确");
+      this.$http
+        .post(this.API.API_Login, {
+          data: this.loginForm,
+        })
+        .then((res) => {
+          if (res.data.code === 200) {
+            //验证成功
+            this.$message({
+              message: "登录成功",
+              type: "success",
+            });
+            //路由跳转
+          } else {
+            this.$message.error("用户名或密码不正确");
+          }
+        });
     },
     register() {
       console.log("test");
@@ -121,9 +136,54 @@ export default {
       this.createcode();
     },
     // 点击注册按钮，验证注册信息
-    inforegister () {
-      console.log("确定注册")
-    }
+    inforegister() {
+      console.log("确定注册");
+      if (this.registerForm.uid == "") {
+        this.$message.error("用户名不为空");
+        return;
+      }
+      if (this.registerForm.pwd == "") {
+        this.$message.error("密码不为空");
+        return;
+      }
+      if (this.registerForm.repwd == "") {
+        this.$message.error("确定密码不为空");
+        return;
+      }
+      if (this.registerForm.repwd != this.registerForm.pwd) {
+        this.$message.error("两次密码不一致")
+        return;
+      }
+      if (/.*[\u4e00-\u9fa5]+.*$/.test(this.registerForm.uid) || /.*[\u4e00-\u9fa5]+.*$/.test(this.registerForm.pwd)) {
+        this.$message.error("用户名或密码不能含中文");
+        return;
+      }
+      if (this.registerForm.uid.length < 6 || this.registerForm.uid.length > 11) {
+        this.$message.error("用户名长度范围为6~11");
+        return;
+      }
+      if (this.registerForm.pwd.length < 8 || this.registerForm.pwd.length > 16) {
+        this.$message.error("密码长度范围为8~16");
+        return;
+      }
+      this.$http
+        .post(this.API.API_Login, {
+          data: this.registerForm,
+        })
+        .then((res) => {
+          if (res.data.code === 200) {
+            //验证成功
+            this.$message({
+              message: "注册成功",
+              type: "success",
+            });
+            //路由跳转
+            this.register();
+          } else {
+            this.$message.error("该用户名已经存在");
+          }
+        });
+    },
   },
 };
 </script>
@@ -310,7 +370,7 @@ section .color:nth-child(3) {
   color: #fff;
   font-weight: 600;
 }
-.box1{
+.box1 {
   position: fixed;
 }
 </style>
