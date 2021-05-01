@@ -6,20 +6,6 @@ from rest_framework.response import Response
 
 
 # Create your views here.
-class Test(ModelViewSet):
-	"""
-	这是一个测试
-	"""
-	pass
-
-
-class Test2(ModelViewSet):
-	"""
-	这是第二个测试
-	"""
-	pass
-
-
 class UserModelViewSet(ModelViewSet):
 	"""
 	这是用户类
@@ -35,5 +21,6 @@ class UserModelViewSet(ModelViewSet):
 				return Response(status=200)
 			return Response(status=400)
 		else:
-			return super().retrieve()
+			return super().retrieve(request, *args, **kwargs)
+
 
