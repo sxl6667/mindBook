@@ -20,11 +20,11 @@
               <input type="password" placeholder="密码" v-model="loginForm.pwd" />
             </div>
             <div class="inputBox">
-              <input type="submit" value="登录" @click="login" />
+              <input type="button" value="登录" @click="login" />
             </div>
             <p class="forget">
               忘记密码 ?
-              <a href="#">找回密码</a>
+              <a href="/">找回密码</a>
             </p>
             <p class="forget">
               还没有账号 ?
@@ -57,10 +57,10 @@
             </div>
             <!-- 后面可以增加手机号码验证 -->
             <div class="inputBox fl">
-              <input type="submit" value="返回登录" @click="register" />
+              <input type="button" value="返回登录" @click="register" />
             </div>
             <div class="inputBox fl">
-              <input type="submit" value="注册" @click="inforegister" class="fr" />
+              <input type="button" value="注册" @click="inforegister" class="fr" />
             </div>
           </form>
         </div>
@@ -110,6 +110,7 @@ export default {
         this.$message.error("用户名或密码不能含中文");
         return;
       }
+      this.$router.push("/blog")
       this.$http
         .post(this.API.API_Login, {
           data: this.loginForm,
@@ -346,7 +347,7 @@ section .color:nth-child(3) {
 .box .form .inputBox input::placeholder {
   color: #fff;
 }
-.box .form .inputBox input[type="submit"] {
+.box .form .inputBox input[type="button"] {
   background: #fff;
   color: #666;
   max-width: 100px;
