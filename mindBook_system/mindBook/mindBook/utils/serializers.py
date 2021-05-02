@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app01.models import User, Label, LabelOf, Learn
+from app01.models import User, Label, LabelOf, Learn, Section
 
 
 class UserModelSerializer(serializers.ModelSerializer):
@@ -23,4 +23,10 @@ class LabelOfModelSerializer(serializers.ModelSerializer):
 class LearnModelSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Learn
+		fields = '__all__'
+
+
+class SectionModelSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Section
 		fields = '__all__'
