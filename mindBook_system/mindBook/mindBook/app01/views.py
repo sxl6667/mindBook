@@ -72,9 +72,10 @@ class LearnModelViewSet(ModelViewSet):
 	filterset_fields = ['uid', 'this_id', 'parent']
 
 
-class SectionAPIView(APIView):
+class SectionModelViewSet(ModelViewSet):
 	"""
 	这是文章视图
 	"""
-	def get(self, request, uid, pk):
-		pass
+	queryset = Section.objects.all()
+	serializer_class = serializer.SectionModelSerializer
+	filterset_fields = ['pid']

@@ -6,11 +6,11 @@ from rest_framework.routers import DefaultRouter
 
 urlpatterns = [
 	path('login/', views.UserModelViewSet.as_view({'post': 'retrieve'})),
-	path('learn/<int:uid>/detail/<int:pk>/', views.SectionAPIView.as_view())
 ]
 router = DefaultRouter()
 router.register('user', views.UserModelViewSet)
 router.register('label', views.LabelModelViewSet)
 router.register('label-link', views.LabelOfModelViewSet)
 router.register('learn', views.LearnModelViewSet)
+router.register('section', views.SectionModelViewSet)
 urlpatterns += router.urls

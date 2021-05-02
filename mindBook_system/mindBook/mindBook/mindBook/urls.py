@@ -22,7 +22,7 @@ from mindBook import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('cors/', include_docs_urls(title='所有API')),
+    path('cors/', include_docs_urls(title='API文档')),
     path('', include(urls))
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
