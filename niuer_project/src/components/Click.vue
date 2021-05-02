@@ -115,14 +115,25 @@ export default {
   },
   methods: {
     Howtime() {
+<<<<<<< HEAD
       let hh = new Date().getHours()*30;
       let mf = new Date().getMinutes()*6;
       let ss = new Date().getSeconds()*6;
       console.log(hh)
+=======
+      let hh = new Date().getHours();
+      let mf = new Date().getMinutes();
+      let ss = new Date().getSeconds();
+      hh = (hh * 3600 + mf * 60 + ss) / 120;
+      mf = (mf * 60 + ss) / 10;
+      ss = ss * 6;
+      console.log(hh);
+>>>>>>> parent of 837333e... 测试
       let hhbox = document.querySelectorAll(".hh");
       let mmbox = document.querySelectorAll(".mm");
       let ssbox = document.querySelectorAll(".ss");
       for (let i = 0; i < hhbox.length; i++) {
+<<<<<<< HEAD
           hhbox[i].style.transform = "rotate("+hh+"deg)"
       }
       for (let i = 0; i < mmbox.length; i++) {
@@ -131,6 +142,30 @@ export default {
       for (let i = 0; i < ssbox.length; i++) {
           ssbox[i].style.transform = "rotate("+ss+"deg)"
       }
+=======
+        hhbox[i].style.transform = "rotate(" + hh + "deg)";
+      }
+      for (let i = 0; i < mmbox.length; i++) {
+        mmbox[i].style.transform = "rotate(" + mf + "deg)";
+      }
+      for (let i = 0; i < ssbox.length; i++) {
+        ssbox[i].style.transform = "rotate(" + ss + "deg)";
+      }
+      let timer = setInterval(() => {
+        hh = hh + 1/120;
+        for (let i = 0; i < hhbox.length; i++) {
+          hhbox[i].style.transform = "rotate(" + hh + "deg)";
+        }
+        mf = mf + 1/10;
+        for (let i = 0; i < mmbox.length; i++) {
+          mmbox[i].style.transform = "rotate(" + mf + "deg)";
+        }
+        ss = ss + 6;
+        for (let i = 0; i < ssbox.length; i++) {
+          ssbox[i].style.transform = "rotate(" + ss + "deg)";
+        }
+      }, 1000);
+>>>>>>> parent of 837333e... 测试
     },
   },
 };
@@ -309,7 +344,11 @@ u > u {
   position: relative;
   background: #a00;
   outline: 1px solid transparent;
+<<<<<<< HEAD
   animation: a360_10 60s normal infinite steps(60, end);
+=======
+  /* animation: a360_10 60s normal infinite steps(60, end); */
+>>>>>>> parent of 837333e... 测试
 }
 .sr {
   width: 0.3em;
@@ -318,14 +357,22 @@ u > u {
   margin: -0.95em 0 0 3.84em;
   border-radius: 0.15em;
 }
+<<<<<<< HEAD
 @keyframes a360_10 {
+=======
+/* @keyframes a360_10 {
+>>>>>>> parent of 837333e... 测试
   0% {
     transform: translate(0, 1em) rotate(0deg) translate(0, -1em);
   }
   100% {
     transform: translate(0, 1em) rotate(360deg) translate(0, -1em);
   }
+<<<<<<< HEAD
 }
+=======
+} */
+>>>>>>> parent of 837333e... 测试
 
 .m {
   height: 4.8em;
@@ -334,17 +381,28 @@ u > u {
   position: relative;
   background: #222;
   border: 0 0 3.2em 0;
+<<<<<<< HEAD
   animation: a36016 3600s normal infinite linear;
   outline: 1px solid transparent;
 }
 @keyframes a36016 {
+=======
+  /* animation: a36016 3600s normal infinite linear; */
+  outline: 1px solid transparent;
+}
+/* @keyframes a36016 {
+>>>>>>> parent of 837333e... 测试
   0% {
     transform: translate(0, 1.6em) rotate(0deg) translate(0, -1.6em);
   }
   100% {
     transform: translate(0, 1.6em) rotate(360deg) translate(0, -1.6em);
   }
+<<<<<<< HEAD
 }
+=======
+} */
+>>>>>>> parent of 837333e... 测试
 
 .mr {
   width: 0.5em;
@@ -361,7 +419,11 @@ u > u {
   background: #222;
   margin-top: 1.3em;
   outline: 1px solid transparent;
+<<<<<<< HEAD
   animation: a36010 43200s normal infinite linear;
+=======
+  /* animation: a36010 43200s normal infinite linear; */
+>>>>>>> parent of 837333e... 测试
 }
 #sh {
   width: 8em;
@@ -427,22 +489,38 @@ u > u {
   }
 }
 #clock .s {
+<<<<<<< HEAD
   -webkit-animation: a360_10 60s normal infinite steps(60, end);
   animation: a360_10 60s normal infinite steps(60, end);
 }
 @-webkit-keyframes a360_10 {
+=======
+  /* -webkit-animation: a360_10 60s normal infinite steps(60, end); */
+  /* animation: a360_10 60s normal infinite steps(60, end); */
+}
+/* @-webkit-keyframes a360_10 {
+>>>>>>> parent of 837333e... 测试
   0% {
     -webkit-transform: translate(0, 1em) rotate(0deg) translate(0, -1em);
   }
   100% {
     -webkit-transform: translate(0, 1em) rotate(360deg) translate(0, -1em);
   }
+<<<<<<< HEAD
 }
 #clock .m {
   -webkit-animation: a36016 3600s normal infinite linear;
   animation: a36016 3600s normal infinite linear;
 }
 @-webkit-keyframes a36016 {
+=======
+} */
+#clock .m {
+  /* -webkit-animation: a36016 3600s normal infinite linear;
+  animation: a36016 3600s normal infinite linear; */
+}
+/* @-webkit-keyframes a36016 {
+>>>>>>> parent of 837333e... 测试
   0% {
     -webkit-transform: translate(0, 1.6em) rotate(0deg) translate(0, -1.6em);
   }
@@ -452,11 +530,19 @@ u > u {
   100% {
     -webkit-transform: translate(0, 1.6em) rotate(360deg) translate(0, -1.6em);
   }
+<<<<<<< HEAD
 }
 #clock .h,
 #css3fixed:checked ~ #clock .hh {
   -webkit-animation: a36010 43200s normal infinite linear;
   animation: a36010 43200s normal infinite linear;
+=======
+} */
+#clock .h,
+#css3fixed:checked ~ #clock .hh {
+  /* -webkit-animation: a36010 43200s normal infinite linear;
+  animation: a36010 43200s normal infinite linear; */
+>>>>>>> parent of 837333e... 测试
 }
 
 /* Fixes */
@@ -522,9 +608,15 @@ u > u {
 }
 /* Opera rotation fix */
 #clock .s {
+<<<<<<< HEAD
   animation: a360_10of 60s normal infinite steps(60, end);
 }
 @keyframes a360_10of {
+=======
+  /* animation: a360_10of 60s normal infinite steps(60, end); */
+}
+/* @keyframes a360_10of {
+>>>>>>> parent of 837333e... 测试
   0% {
     transform: translate(0, 1em) rotate(0deg) translate(0, -1em);
     -o-transform: translate(0, 2em) rotate(0deg) translate(0, -2em);
@@ -533,7 +625,11 @@ u > u {
     transform: translate(0, 1em) rotate(360deg) translate(0, -1em);
     -o-transform: translate(0, 2em) rotate(360deg) translate(0, -2em);
   }
+<<<<<<< HEAD
 }
+=======
+} */
+>>>>>>> parent of 837333e... 测试
 
 /*** Font for numbers ***/
 /* @font-face {
