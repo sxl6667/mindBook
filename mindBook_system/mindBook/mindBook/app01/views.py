@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet
-from app01.models import User, Label, LabelOf, Learn, Section, Thinking, Navigation, MyAPI
+from app01.models import User, Label, LabelOf, Learn, Section, Thinking, Navigation, MyAPI, Album, Photo, PhotoOf
 import utils.serializers as serializer
 import utils.myOfserializer as myOf
 from rest_framework.response import Response
@@ -22,7 +22,6 @@ class UserModelViewSet(ModelViewSet):
 			data = request.data
 			verify = User.objects.filter(uid=data['uid'], pwd=data['pwd'])
 			if verify:
-				print(verify)
 				return Response(status=200)
 			return Response(status=203)
 		else:
@@ -101,3 +100,33 @@ class NavigationModelViewSet(ModelViewSet):
 class MyAPIModelViewSet(ModelViewSet):
 	queryset = MyAPI.objects.all()
 	serializer_class = serializer.MyAPIModelSerializer
+
+
+class AlbumModelViewSet(ModelViewSet):
+	queryset = Album.objects.all()
+	serializer_class = serializer.AlbumModelSerializer
+
+class PhotoModelViewSet(ModelViewSet):
+	queryset = PhotoOf.objects.all()
+	serializer_class = serializer.PhotoOfModelSerializer
+
+class PhotoAPIView(APIView):
+	def post(self, request, pk):
+		data = request.data
+		instance = serializer.PhotoModelSerializer(data=data)
+		instance.is_valid(raise_exception=True)
+		instance.save()
+		data = {
+			'aid': pk,
+			'pid': instance.data['id']
+		}
+		instance = my_save(data, serializer.PhotoOfModelSerializer)
+		print(instance)
+		return Response(status=200, data=instance)
+
+
+def my_save(data: {}, model_serializer) -> {}:
+		instance = model_serializer(data=data)
+		instance.is_valid(raise_exception=True)
+		instance.save()
+		return instance.data

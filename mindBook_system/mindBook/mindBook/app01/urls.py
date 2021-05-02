@@ -6,6 +6,7 @@ from rest_framework.routers import DefaultRouter
 
 urlpatterns = [
 	path('login/', views.UserModelViewSet.as_view({'post': 'retrieve'})),
+	path('album/img/<int:pk>/', views.PhotoAPIView.as_view())
 ]
 router = DefaultRouter()
 router.register('user', views.UserModelViewSet)
@@ -16,4 +17,6 @@ router.register('section', views.SectionModelViewSet)
 router.register('thinking', views.ThinkingModelViewSet)
 router.register('navigation', views.NavigationModelViewSet)
 router.register('api', views.MyAPIModelViewSet)
+router.register('album', views.AlbumModelViewSet)
+router.register('photo', views.PhotoModelViewSet)
 urlpatterns += router.urls

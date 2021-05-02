@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app01.models import User, Label, LabelOf, Learn, Section, Thinking, Navigation, MyAPI
+from app01.models import User, Label, LabelOf, Learn, Section, Thinking, Navigation, MyAPI, Album, Photo, PhotoOf
 
 
 class UserModelSerializer(serializers.ModelSerializer):
@@ -47,4 +47,22 @@ class NavigationModelSerializer(serializers.ModelSerializer):
 class MyAPIModelSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = MyAPI
+		fields = '__all__'
+
+
+class AlbumModelSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Album
+		fields = '__all__'
+
+
+class PhotoModelSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Photo
+		fields = '__all__'
+
+
+class PhotoOfModelSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = PhotoOf
 		fields = '__all__'

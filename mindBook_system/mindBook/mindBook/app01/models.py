@@ -72,3 +72,19 @@ class MyAPI(models.Model):
 	uid = models.IntegerField(verbose_name='所属用户id')
 	title = models.CharField(max_length=32, verbose_name='导航的备注或者描述')
 	src = models.TextField(verbose_name='链接')
+
+
+class Album(models.Model):
+	title = models.CharField(max_length=16, verbose_name='相册标题')
+	detail = models.CharField(max_length=32, verbose_name='相册备注')
+	poster = models.ImageField(verbose_name='相册封面')
+
+
+class Photo(models.Model):
+	title = models.CharField(max_length=16, verbose_name='照片标题')
+	src = models.ImageField(verbose_name='照片地址')
+
+
+class PhotoOf(models.Model):
+	aid = models.IntegerField(verbose_name='相册id')
+	pid = models.IntegerField(verbose_name='图片id')
