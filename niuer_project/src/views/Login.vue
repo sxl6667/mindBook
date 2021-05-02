@@ -120,7 +120,7 @@ export default {
               type: "success",
             });
             //路由跳转
-            this.$router.push("/blog")
+              this.$router.push("/blog")
           } else {
             this.$message.error("用户名或密码不正确");
           }
