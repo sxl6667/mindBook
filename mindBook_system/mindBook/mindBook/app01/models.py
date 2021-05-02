@@ -29,3 +29,18 @@ class LabelOf(models.Model):
 	pid = models.IntegerField(verbose_name='所属内容id')
 	uid = models.IntegerField(verbose_name='标签所属用户id')
 	did = models.IntegerField(verbose_name='关联的标签id')
+
+
+class Learn(models.Model):
+	"""
+	学习计划表
+	"""
+	uid = models.IntegerField(verbose_name='所属用户id')
+	this_id = models.IntegerField(verbose_name='学习计划id')
+	parent = models.IntegerField(verbose_name='父节点', help_text='父节点为0为根节点')
+	order = models.IntegerField(verbose_name='该父节点下的第几位')
+	title = models.CharField(max_length=16, verbose_name='标题')
+	detail = models.CharField(max_length=32, verbose_name='备注', default='')
+	add_date = models.DateTimeField(verbose_name='创建的时间', default=timezone.now)
+	mod_date = models.DateTimeField(verbose_name='每次更新时间', help_text='用来回溯', auto_now=True)
+

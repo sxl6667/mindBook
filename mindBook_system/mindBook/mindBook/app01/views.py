@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from app01.models import User, Label, LabelOf
+from app01.models import User, Label, LabelOf, Learn
 import utils.serializers as serializer
 import utils.myOfserializer as myOf
 from rest_framework.response import Response
@@ -52,10 +52,15 @@ class LabelOfModelViewSet(ModelViewSet):
 
 	def list(self, request, *args, **kwargs):
 		queryset = self.filter_queryset(self.get_queryset())
-		serializer = self.get_serializer(queryset, many=True)
-		data = myOf.label_of_data(serializer.data)
+		data = self.get_serializer(queryset, many=True)
+		data = myOf.label_of_data(data.data)
 		# print(data)
 		# return super().list(request, *args, **kwargs)
 		return Response(data=data)
 
+
+class LearnModelViewSet(ModelViewSet):
+	queryset = Learn.objects.all()
+	serializer_class = serializer.LearnModelSerializer
+	filterset_fields = ['uid', 'this_id', 'parent']
 

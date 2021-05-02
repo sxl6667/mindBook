@@ -10,7 +10,6 @@ urlpatterns = [
 router = DefaultRouter()
 router.register('user', views.UserModelViewSet)
 router.register('label', views.LabelModelViewSet)
-router.register(r'label-link', views.LabelOfModelViewSet)
+router.register('label-link', views.LabelOfModelViewSet)
+router.register('learn', views.LearnModelViewSet)
 urlpatterns += router.urls
-for i in urlpatterns:
-	print(i)
