@@ -26,7 +26,7 @@ class UserModelViewSet(ModelViewSet):
 			return super().retrieve(request, *args, **kwargs)
 
 	def create(self, request, *args, **kwargs):
-		data = request.data.copy()
+		data = request.data
 		verify = User.objects.filter(uid=data['uid'])
 		if verify:
 			return Response(status=400, data={'msg': '账号已存在'})
@@ -60,6 +60,12 @@ class LabelOfModelViewSet(ModelViewSet):
 
 
 class LearnModelViewSet(ModelViewSet):
+	"""
+	这是学习计划视图
+	uid: 为所属用户
+	this_id: 为所属学习计划
+	parent: 为父节点id
+	"""
 	queryset = Learn.objects.all()
 	serializer_class = serializer.LearnModelSerializer
 	filterset_fields = ['uid', 'this_id', 'parent']
