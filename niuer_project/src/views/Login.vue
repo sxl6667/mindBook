@@ -110,19 +110,17 @@ export default {
         this.$message.error("用户名或密码不能含中文");
         return;
       }
-      this.$router.push("/blog")
       this.$http
-        .post(this.API.API_Login, {
-          data: this.loginForm,
-        })
+        .post(this.API.API_Login, this.loginForm)
         .then((res) => {
-          if (res.data.code === 200) {
+          if (res.status === 200) {
             //验证成功
             this.$message({
               message: "登录成功",
               type: "success",
             });
             //路由跳转
+            this.$router.push("/blog")
           } else {
             this.$message.error("用户名或密码不正确");
           }

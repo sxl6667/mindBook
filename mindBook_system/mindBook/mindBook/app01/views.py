@@ -22,8 +22,9 @@ class UserModelViewSet(ModelViewSet):
 			data = request.data
 			verify = User.objects.filter(uid=data['uid'], pwd=data['pwd'])
 			if verify:
+				print(verify)
 				return Response(status=200)
-			return Response(status=400)
+			return Response(status=401.1)
 		else:
 			return super().retrieve(request, *args, **kwargs)
 
