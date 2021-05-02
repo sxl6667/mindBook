@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from app01.models import User
+from app01.models import User, Label, LabelOf
 import utils.serializers as serializer
+import utils.myOfserializer as myOf
 from rest_framework.response import Response
 
 
@@ -23,5 +24,31 @@ class UserModelViewSet(ModelViewSet):
 			return Response(status=400)
 		else:
 			return super().retrieve(request, *args, **kwargs)
+
+
+class LabelModelViewSet(ModelViewSet):
+	"""
+	这是标签视图
+	"""
+	queryset = Label.objects.all()
+	serializer_class = serializer.LabelModelSerializer
+
+
+class LabelOfModelViewSet(ModelViewSet):
+	"""
+	这是标签关系视图，
+	重写list方法
+	"""
+	queryset = LabelOf.objects.all()
+	serializer_class = serializer.LabelOfModelSerializer
+	filterset_fields = ['uid']
+
+	def list(self, request, *args, **kwargs):
+		queryset = self.filter_queryset(self.get_queryset())
+		serializer = self.get_serializer(queryset, many=True)
+		data = myOf.label_of_data(serializer.data)
+		# print(data)
+		# return super().list(request, *args, **kwargs)
+		return Response(data=data)
 
 

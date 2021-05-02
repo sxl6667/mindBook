@@ -12,3 +12,20 @@ class User(models.Model):
 	poster = models.ImageField(verbose_name='用户的头像', help_text='一个图片路径', upload_to='lsrc', default='')
 	add_date = models.DateTimeField(verbose_name='创建时间', default=timezone.now)
 	mod_date = models.DateTimeField(verbose_name='每次更新时间', help_text='用来回溯', auto_now=True)
+
+
+class Label(models.Model):
+	"""
+	标签
+	"""
+	title = models.CharField(max_length=32, verbose_name='标签内容', help_text='如java，python')
+
+
+class LabelOf(models.Model):
+	"""
+	标签关系表
+	"""
+	mid = models.IntegerField(verbose_name='所属的模块id')
+	pid = models.IntegerField(verbose_name='所属内容id')
+	uid = models.IntegerField(verbose_name='标签所属用户id')
+	did = models.IntegerField(verbose_name='关联的标签id')
