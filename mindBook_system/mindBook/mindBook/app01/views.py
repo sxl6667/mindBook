@@ -25,6 +25,13 @@ class UserModelViewSet(ModelViewSet):
 		else:
 			return super().retrieve(request, *args, **kwargs)
 
+	def create(self, request, *args, **kwargs):
+		data = request.data.copy()
+		verify = User.objects.filter(uid=data['uid'])
+		if verify:
+			return Response(status=400, data={'msg': '账号已存在'})
+		return super().create(request, *args, **kwargs)
+
 
 class LabelModelViewSet(ModelViewSet):
 	"""
