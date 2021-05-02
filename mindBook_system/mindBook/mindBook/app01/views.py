@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet
-from app01.models import User, Label, LabelOf, Learn, Section
+from app01.models import User, Label, LabelOf, Learn, Section, Thinking, Navigation, MyAPI
 import utils.serializers as serializer
 import utils.myOfserializer as myOf
 from rest_framework.response import Response
@@ -79,3 +80,23 @@ class SectionModelViewSet(ModelViewSet):
 	queryset = Section.objects.all()
 	serializer_class = serializer.SectionModelSerializer
 	filterset_fields = ['pid']
+
+
+class ThinkingModelViewSet(ModelViewSet):
+	"""
+	这是想法视图
+	"""
+	queryset = Thinking.objects.all()
+	serializer_class = serializer.ThinkingModelSerializer
+	filter_backends = [filters.OrderingFilter]
+	ordering_fields = ['add_date']
+
+
+class NavigationModelViewSet(ModelViewSet):
+	queryset = Navigation.objects.all()
+	serializer_class = serializer.NavigationModelSerializer
+
+
+class MyAPIModelViewSet(ModelViewSet):
+	queryset = MyAPI.objects.all()
+	serializer_class = serializer.MyAPIModelSerializer

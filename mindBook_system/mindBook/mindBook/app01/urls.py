@@ -13,4 +13,7 @@ router.register('label', views.LabelModelViewSet)
 router.register('label-link', views.LabelOfModelViewSet)
 router.register('learn', views.LearnModelViewSet)
 router.register('section', views.SectionModelViewSet)
+router.register('thinking', views.ThinkingModelViewSet)
+router.register('navigation', views.NavigationModelViewSet)
+router.register('api', views.MyAPIModelViewSet)
 urlpatterns += router.urls
