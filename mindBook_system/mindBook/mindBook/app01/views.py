@@ -12,6 +12,7 @@ class UserModelViewSet(ModelViewSet):
 	"""
 	queryset = User.objects.all()
 	serializer_class = serializer.UserModelSerializer
+	filterset_fields = ['uid']
 
 	def retrieve(self, request, *args, **kwargs):
 		if request.method == 'POST':

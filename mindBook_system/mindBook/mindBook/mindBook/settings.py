@@ -147,7 +147,10 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-    ]
+    ],
+    #全局过滤设置
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+
 }
 MEDIA_URL = '/medias/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'medias')
