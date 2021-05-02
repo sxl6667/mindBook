@@ -1,8 +1,7 @@
 <template>
   <div class="container clearfix">
-    <header class="clearfix">
-      <div style="width:20%;height:100%" class="fl"></div>
-      <Click class="fl"></Click>
+    <header>
+      <Click class="fl click"></Click>
     </header>
     <aside class="fl"></aside>
     <main class="fr"></main>
@@ -28,10 +27,16 @@ export default {
   background: rgb(216, 17, 133);
   position: relative;
   header {
-    height: 100px;
+    height: 180px;
     width: 100%;
     background: rgb(119, 78, 78);
     position: fixed;
+    .click {
+        position: absolute;
+        left: 20%;
+        top: 50%;
+        transform: translateX(52%);
+    }
   }
   aside {
     position: fixed;
