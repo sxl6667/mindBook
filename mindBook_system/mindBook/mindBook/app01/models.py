@@ -44,3 +44,31 @@ class Learn(models.Model):
 	add_date = models.DateTimeField(verbose_name='创建的时间', default=timezone.now)
 	mod_date = models.DateTimeField(verbose_name='每次更新时间', help_text='用来回溯', auto_now=True)
 
+
+class Section(models.Model):
+	uid = models.IntegerField(verbose_name='所属用户id')
+	pid = models.IntegerField(verbose_name='该文章所属资源')
+	title = models.CharField(max_length=32, verbose_name='标题')
+	detail = models.TextField(verbose_name='文本内容')
+	add_date = models.DateTimeField(verbose_name='创建的时间', default=timezone.now)
+	mod_date = models.DateTimeField(verbose_name='每次更新时间', help_text='用来回溯', auto_now=True)
+
+
+class Thinking(models.Model):
+	uid = models.IntegerField(verbose_name='所属用户id')
+	title = models.CharField(max_length=32, verbose_name='标题')
+	detail = models.TextField(verbose_name='文本内容')
+	add_date = models.DateTimeField(verbose_name='创建的时间', default=timezone.now)
+	mod_date = models.DateTimeField(verbose_name='每次更新时间', help_text='用来回溯', auto_now=True)
+
+
+class Navigation(models.Model):
+	uid = models.IntegerField(verbose_name='所属用户id')
+	title = models.CharField(max_length=32, verbose_name='导航的备注或者描述')
+	src = models.TextField(verbose_name='链接')
+
+
+class MyAPI(models.Model):
+	uid = models.IntegerField(verbose_name='所属用户id')
+	title = models.CharField(max_length=32, verbose_name='导航的备注或者描述')
+	src = models.TextField(verbose_name='链接')
