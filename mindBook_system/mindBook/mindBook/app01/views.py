@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from app01.models import User, Label, LabelOf
+from app01.models import User, Label, LabelOf, Learn
 import utils.serializers as serializer
 import utils.myOfserializer as myOf
 from rest_framework.response import Response
@@ -26,7 +26,7 @@ class UserModelViewSet(ModelViewSet):
 			return super().retrieve(request, *args, **kwargs)
 
 	def create(self, request, *args, **kwargs):
-		data = request.data.copy()
+		data = request.data
 		verify = User.objects.filter(uid=data['uid'])
 		if verify:
 			return Response(status=400, data={'msg': '账号已存在'})
@@ -52,10 +52,21 @@ class LabelOfModelViewSet(ModelViewSet):
 
 	def list(self, request, *args, **kwargs):
 		queryset = self.filter_queryset(self.get_queryset())
-		serializer = self.get_serializer(queryset, many=True)
-		data = myOf.label_of_data(serializer.data)
+		data = self.get_serializer(queryset, many=True)
+		data = myOf.label_of_data(data.data)
 		# print(data)
 		# return super().list(request, *args, **kwargs)
 		return Response(data=data)
 
+
+class LearnModelViewSet(ModelViewSet):
+	"""
+	这是学习计划视图
+	uid: 为所属用户
+	this_id: 为所属学习计划
+	parent: 为父节点id
+	"""
+	queryset = Learn.objects.all()
+	serializer_class = serializer.LearnModelSerializer
+	filterset_fields = ['uid', 'this_id', 'parent']
 
