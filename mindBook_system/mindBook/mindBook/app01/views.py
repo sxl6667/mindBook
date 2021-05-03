@@ -3,6 +3,7 @@ from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet
 from app01.models import User, Label, LabelOf, Learn, Section, Thinking, Navigation, MyAPI, Album, Photo, PhotoOf
 import utils.serializers as serializer
+from utils.serializers import relation
 import utils.myOfserializer as myOf
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -51,13 +52,17 @@ class LabelOfModelViewSet(ModelViewSet):
 	queryset = LabelOf.objects.all()
 	serializer_class = serializer.LabelOfModelSerializer
 	filterset_fields = ['uid']
+	relation = {
+		'pid': Learn,
+		'uid': User,
+		'did': Label
+	}
 
 	def list(self, request, *args, **kwargs):
 		queryset = self.filter_queryset(self.get_queryset())
 		data = self.get_serializer(queryset, many=True)
-		data = myOf.label_of_data(data.data)
-		# print(data)
-		# return super().list(request, *args, **kwargs)
+		# data = myOf.label_of_data(data.data)
+		data = myOf.table_of(self.relation, data.data)
 		return Response(data=data)
 
 
@@ -106,9 +111,29 @@ class AlbumModelViewSet(ModelViewSet):
 	queryset = Album.objects.all()
 	serializer_class = serializer.AlbumModelSerializer
 
+
 class PhotoModelViewSet(ModelViewSet):
+	"""
+	关系表的使用:
+	relation : 关系表，为关联字段和model
+	relation_2 : models和其序列化器
+	"""
 	queryset = PhotoOf.objects.all()
 	serializer_class = serializer.PhotoOfModelSerializer
+	relation = {
+		'aid': Album,
+		'pid': Photo
+	}
+
+	def list(self, request, *args, **kwargs):
+		try:
+			queryset = self.filter_queryset(self.get_queryset())
+			serializer = self.get_serializer(queryset, many=True)
+			data = myOf.table_of(self.relation, serializer.data)
+			return Response(data=data)
+		except:
+			return super().list(request, *args, **kwargs)
+
 
 class PhotoAPIView(APIView):
 	def post(self, request, pk):

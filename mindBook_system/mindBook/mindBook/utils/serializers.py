@@ -66,3 +66,12 @@ class PhotoOfModelSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = PhotoOf
 		fields = '__all__'
+
+
+relation = {
+	Album: AlbumModelSerializer,
+	Photo: PhotoModelSerializer,
+	Label: LabelModelSerializer,
+	User: UserModelSerializer,
+	Learn: LearnModelSerializer
+}
