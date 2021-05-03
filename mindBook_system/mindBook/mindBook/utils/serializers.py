@@ -67,7 +67,7 @@ class PhotoOfModelSerializer(serializers.ModelSerializer):
 		model = PhotoOf
 		fields = '__all__'
 
-
+# 每次添加serializer是添加到该位置
 relation = {
 	Album: AlbumModelSerializer,
 	Photo: PhotoModelSerializer,
