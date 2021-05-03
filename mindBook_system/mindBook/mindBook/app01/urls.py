@@ -19,4 +19,5 @@ router.register('navigation', views.NavigationModelViewSet)
 router.register('api', views.MyAPIModelViewSet)
 router.register('album', views.AlbumModelViewSet)
 router.register('photo', views.PhotoModelViewSet)
+router.register('resource', views.ResourceModelViewSet)
 urlpatterns += router.urls

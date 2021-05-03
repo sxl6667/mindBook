@@ -88,3 +88,10 @@ class Photo(models.Model):
 class PhotoOf(models.Model):
 	aid = models.IntegerField(verbose_name='相册id')
 	pid = models.IntegerField(verbose_name='图片id')
+
+
+class Resource(models.Model):
+	uid = models.IntegerField(verbose_name='所属用户')
+	title = models.CharField(max_length=16, verbose_name='标题')
+	poster = models.ImageField(verbose_name='封面', default='')
+	file = models.FileField(verbose_name='文件', upload_to='file')

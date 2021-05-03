@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet
-from app01.models import User, Label, LabelOf, Learn, Section, Thinking, Navigation, MyAPI, Album, Photo, PhotoOf
+from app01.models import User, Label, LabelOf, Learn, Section, Thinking, Navigation, MyAPI, Album, Photo, PhotoOf, \
+	Resource
 import utils.serializers as serializer
 from utils.serializers import relation
 import utils.myOfserializer as myOf
@@ -155,3 +156,8 @@ def my_save(data: {}, model_serializer) -> {}:
 		instance.is_valid(raise_exception=True)
 		instance.save()
 		return instance.data
+
+
+class ResourceModelViewSet(ModelViewSet):
+	queryset = Resource.objects.all()
+	serializer_class = serializer.ResourceModelSerializer

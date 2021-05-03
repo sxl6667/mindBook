@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from app01.models import User, Label, LabelOf, Learn, Section, Thinking, Navigation, MyAPI, Album, Photo, PhotoOf
+from app01.models import User, Label, LabelOf, Learn, Section, Thinking, Navigation, MyAPI, Album, Photo, PhotoOf, \
+	Resource
 
 
 class UserModelSerializer(serializers.ModelSerializer):
@@ -67,11 +68,18 @@ class PhotoOfModelSerializer(serializers.ModelSerializer):
 		model = PhotoOf
 		fields = '__all__'
 
+
+class ResourceModelSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Resource
+		fields = '__all__'
+
 # 每次添加serializer是添加到该位置
 relation = {
 	Album: AlbumModelSerializer,
 	Photo: PhotoModelSerializer,
 	Label: LabelModelSerializer,
 	User: UserModelSerializer,
-	Learn: LearnModelSerializer
+	Learn: LearnModelSerializer,
+	Resource: ResourceModelSerializer,
 }
