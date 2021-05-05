@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'app01.myMiddle.Level',
 ]
 
 ROOT_URLCONF = 'mindBook.urls'
@@ -128,6 +129,7 @@ USE_L10N = True
 
 USE_TZ = False
 
+SESSION_COOKIE_AGE = 10000
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

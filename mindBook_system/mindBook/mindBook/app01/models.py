@@ -12,6 +12,7 @@ class User(models.Model):
 	poster = models.ImageField(verbose_name='用户的头像', help_text='一个图片路径', upload_to='lsrc', default='')
 	add_date = models.DateTimeField(verbose_name='创建时间', default=timezone.now)
 	mod_date = models.DateTimeField(verbose_name='每次更新时间', help_text='用来回溯', auto_now=True)
+	level = models.BooleanField(verbose_name='用户是否有管理员权限', default=False)
 
 
 class Label(models.Model):
@@ -95,3 +96,8 @@ class Resource(models.Model):
 	title = models.CharField(max_length=16, verbose_name='标题')
 	poster = models.ImageField(verbose_name='封面', default='')
 	file = models.FileField(verbose_name='文件', upload_to='file')
+
+
+class UserLevel(models.Model):
+	uid = models.IntegerField(verbose_name='用户id')
+	level = models.IntegerField(verbose_name='用户等级', default=0)

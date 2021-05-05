@@ -4,7 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 from app01.models import User, Label, LabelOf, Learn, Section, Thinking, Navigation, MyAPI, Album, Photo, PhotoOf, \
 	Resource
 import utils.serializers as serializer
-from utils.serializers import relation
+from utils.myEnum import level
 import utils.myOfserializer as myOf
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -24,6 +24,8 @@ class UserModelViewSet(ModelViewSet):
 			data = request.data
 			verify = User.objects.filter(uid=data['uid'], pwd=data['pwd'])
 			if verify:
+				if verify[0].level:
+					request.session['level'] = level.admin.value
 				return Response(status=200)
 			return Response(status=203)
 		else:
