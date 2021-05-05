@@ -24,8 +24,7 @@ class UserModelViewSet(ModelViewSet):
 			data = request.data
 			verify = User.objects.filter(uid=data['uid'], pwd=data['pwd'])
 			if verify:
-				if verify[0].level:
-					request.session['level'] = level.admin.value
+				request.session['level'] = verify[0].level and level.admin.value or level.user.value
 				return Response(status=200)
 			return Response(status=203)
 		else:

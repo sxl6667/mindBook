@@ -11,10 +11,12 @@ class Level(MiddlewareMixin):
 		# print(request.path)
 		# print(level.admin.value)
 		# print(request.method)
+		method = ['POST', 'DELETE', 'PUT']
 		if request.path == '/login/':
 			pass
 		elif request.session.get('level') is not level.admin.value:
-			return HttpResponse('没有管理员权限')
+			if request.method in method:
+				return HttpResponse('没有管理员权限')
 			pass
 		# return HttpResponse('维护中')
 
