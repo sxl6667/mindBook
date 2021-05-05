@@ -161,3 +161,5 @@ def my_save(data: {}, model_serializer) -> {}:
 class ResourceModelViewSet(ModelViewSet):
 	queryset = Resource.objects.all()
 	serializer_class = serializer.ResourceModelSerializer
+
+
