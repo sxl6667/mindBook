@@ -30,7 +30,7 @@
               还没有账号 ?
               <span @click="register">注册</span>
             </p>
-          </form>
+          </form> 
         </div>
       </div>
     </div>
